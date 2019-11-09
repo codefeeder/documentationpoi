@@ -77,17 +77,17 @@
             </pre>
           </div>
           <h3> Data Description</h3>
-          <p>
-            1) Elements in the data were represented as nodes. <br />
-            2) Each node comprises of the Latitude, Longitude and tags. <br />
-            3) Tags provide a description of the corresponding node. <br />
-          </p>
+          <ul>
+            <li> Elements in the data were represented as nodes. </li>
+            <li> Each node comprises of the Latitude, Longitude and tags. </li>
+            <li> Tags provide a description of the corresponding node. </li>
+          </ul>
           <h3> Data Cleaning</h3>
-          <p>
-            1) Nodes with no tags were removed from the dataset as it was not possible to determine their commercial significance. <br />
-            2) Attributes in tags that were not highlighting any commercial significance of the nodes were removed.<br />
-            3) Nodes with tags of commercial significance were finally selected for market identification.
-          </p>
+          <ul>
+            <li> Nodes with no tags were removed from the dataset as it was not possible to determine their commercial significance. </li>
+            <li> Attributes in tags that were not highlighting any commercial significance of the nodes were removed.</li>
+            <li> Nodes with tags of commercial significance were finally selected for market identification.</li>
+          </ul>
           <h3> Data Visualization</h3>
           <p>Nodes in the data plotted on a Scatter Plot.</p>
           <img src="images/data_visual.PNG" alt="Nodes in the data">
@@ -97,11 +97,11 @@
             DBSCAN forms clusters that are dense regions in the data space, separated by regions of the lower density of points. The DBSCAN algorithm is based on this intuitive notion of “clusters” and “noise”.
           </p>
           <h4> Reasons for selecting DBSCAN </h4>
-          <p>
-            1) Partitioning methods (K-means, PAM clustering) and hierarchical clustering work for finding spherical-shaped clusters or convex clusters. <br />
-            2) DBSCAN algorithm tries to locate regions of high density that are separated from one another by regions of low density. Therefore, while dealing with spatial clusters of different density, size and shape, DBSCAN gives better results. <br />
-            3) Another advantage of DBSCAN is that the parameters required are spatial parameters like distance(epsilon) and number of samples in neighborhood(min_sample). These parameters are easier to set in spatial clustering over parameters like number of clusters required.<br />
-          </p>
+          <ul>
+            <li> Partitioning methods (K-means, PAM clustering) and hierarchical clustering work for finding spherical-shaped clusters or convex clusters. </li>
+            <li> DBSCAN algorithm tries to locate regions of high density that are separated from one another by regions of low density. Therefore, while dealing with spatial clusters of different density, size and shape, DBSCAN gives better results. </li>
+            <li> Another advantage of DBSCAN is that the parameters required are spatial parameters like distance(epsilon) and number of samples in neighborhood(min_sample). These parameters are easier to set in spatial clustering over parameters like number of clusters required.</li>
+          </ul>
           <h4>Distance Metric - Haversine Metric - The haversine formula determines the great-circle distance between two points on a sphere given their longitudes and latitudes.</h4>
           <h4>We feed in our lists of latitutdes and longitudes for the nodes to the algorithm.</h4>
         </section>
