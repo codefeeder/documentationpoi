@@ -23,45 +23,97 @@
     <div class="wrapper">
       <aside class="doc__nav">
         <ul>
-          <li class="js-btn selected">Overview of Methodology</li>
-          <li class="js-btn">Installation</li>
-          <li class="js-btn">Keybindings</li>
-          <li class="js-btn">Issues</li>
+          <li class="js-btn selected">Setup</li>
+          <li class="js-btn">Overview of Methodology</li>
+          <li class="js-btn">Results</li>
         </ul>
       </aside>
       <article class="doc__content">
-        <section class="js-section">
-          <h3 class="section__title">Overview of Methodology</h3>
-          <p>Learn how to configure settings for Scribbler, such as your syntax highlighting preference and the default saving folder location.</p>
-        </section>
-        <section class="js-section">
-          <h3 class="section__title">Installation</h3>
+                <section class="js-section">
+          <h2 class="section__title">Setup</h2>
+          <p> Create a Conda Environment or Virtual Environment.</p>
           <div class="code__block code__block--notabs">
             <pre class="code code--block">
               <code>
-                $ scribbler  ——config
-                  {
-                    “encryption”: true, 
-                    “highlighting“: true,
-                    “prettyTable”: false,
-                    “font”: [“Helvetica”, “sans-serif”],
-                    “folder”: “~/Desktop“
-                  }
+                $ pip install virtualenv
+                $ virtualenv myenv
+              </code>
+            </pre>
+          </div>
+          <p> Activate the created Environment.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ myenv\Scripts\activate
+              </code>
+            </pre>
+          </div>
+          <p> Install all the dependencies for the analysis.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ pip install -r requirements.txt  
               </code>
             </pre>
           </div>
         </section>
         <section class="js-section">
-          <h3 class="section__title">Keybindings</h3>
-          <p>Lorem ipsum dolor sit amet, scripta tibique indoctum sit ei, mel inani aeterno ad. Facer oratio ex per. At eam movet verear, in sea brute patrioque disputando, usu nonumes torquatos an. Ex his quaerendum intellegebat, ut vel homero accusam. Eum at debet tibique, in vocibus temporibus adversarium sed. Porro verear eu vix, ne usu tation vituperata.</p>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
-          <hr />
+          <h2 class="section__title">Overview of Methodology</h2>
+          <p> Identification of all the Markets/Commercial Centers in NCR using OSM Point of Interest Data. </p>
+          <h3> Data Collection</h3>
+          <p>
+            Point of Interest OSM data for New Delhi was collected using the overpass API.
+          </p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                overpass_query = """
+                [out:json];
+                area["ISO3166-2"="IN-DL"];
+                node["amenity"=](area);
+                out;
+                """
+              </code>
+            </pre>
+          </div>
+          <h3> Data Description</h3>
+          <p>
+            1) Elements in the data were represented as nodes. <br />
+            2) Each node comprises of the Latitude, Longitude and tags. <br />
+            3) Tags provide a description of the corresponding node. <br />
+          </p>
+          <h3> Data Cleaning</h3>
+          <p>
+            1) Nodes with no tags were removed from the dataset as it was not possible to determine their commercial significance. <br />
+            2) Attributes in tags that were not highlighting any commercial significance of the nodes were removed.<br />
+            3) Nodes with tags of commercial significance were finally selected for market identification.
+          </p>
+          <h3> Data Visualization</h3>
+          <p>Nodes in the data plotted on a Scatter Plot.</p>
+          <img src="images/data_visual.PNG" alt="Nodes in the data">
+          <h3> Clustering Algorithm Description</h3>
+          <h4> Density-based Spatial Clustering of Applications with Noise (DBSCAN)</h4>
+          <p>
+            DBSCAN forms clusters that are dense regions in the data space, separated by regions of the lower density of points. The DBSCAN algorithm is based on this intuitive notion of “clusters” and “noise”.
+          </p>
+          <h4> Reasons for selecting DBSCAN </h4>
+          <p>
+            1) Partitioning methods (K-means, PAM clustering) and hierarchical clustering work for finding spherical-shaped clusters or convex clusters. <br />
+            2) DBSCAN algorithm tries to locate regions of high density that are separated from one another by regions of low density. Therefore, while dealing with spatial clusters of different density, size and shape, DBSCAN gives better results. <br />
+            3) Another advantage of DBSCAN is that the parameters required are spatial parameters like distance(epsilon) and number of samples in neighborhood(min_sample). These parameters are easier to set in spatial clustering over parameters like number of clusters required.<br />
+          </p>
+          <h4>We feed in our lists of latitutdes and longitudes for the nodes to the algorithm.</h4>
         </section>
         <section class="js-section">
-          <h3 class="section__title">Issues</h3>
-          <p>Lorem ipsum dolor sit amet, scripta tibique indoctum sit ei, mel inani aeterno ad. Facer oratio ex per. At eam movet verear, in sea brute patrioque disputando, usu nonumes torquatos an. Ex his quaerendum intellegebat, ut vel homero accusam. Eum at debet tibique, in vocibus temporibus adversarium sed. Porro verear eu vix, ne usu tation vituperata.</p>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
+          <h2 class="section__title">Results</h2>
+          <h3>The following scatter plot provides an overview of the markets(clusters) identified during analysis.</h3>
+          <img src="images/clusters.PNG" alt="clusters">
+          <p>x axis - Longitude, y axis - Latitude</p>
+          <h3>The following scatter plot provides an overview of the center coordinates of the markets identified during analysis.</h3>
+          <img src="images/center.PNG" alt="Centers of markets">
+          <p>x axis - Longitude, y axis - Latitude</p>
+          <h3>The following map highlights the results (all the commercial centers/markets) obtained after analysis marked on New Delhi's map.</h3>
+          <img src="images/commercial_centers.PNG" alt="Markets marked on the map of New Delhi" height="342" width="639">
         </section>
       </article>
     </div>
